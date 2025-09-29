@@ -2,7 +2,7 @@
   <div class="container header-content">
     <!-- Logo kiri -->
     <div class="logo-img">
-      <img src="Tubankab.png" alt="Logo Kabupaten Tuban" />
+      <img src="pages/Tubankab.png" alt="Logo Kabupaten Tuban" />
     </div>
 
     <!-- Judul tengah -->

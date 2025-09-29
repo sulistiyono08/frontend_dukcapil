@@ -14,7 +14,7 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            background: url('tampilan/Tubankab.png') no-repeat center center fixed;
+            background: url('Tubankab.png') no-repeat center center fixed;
             background-size: contain;
             font-family: Arial, sans-serif;
             display: flex;

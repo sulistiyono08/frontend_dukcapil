@@ -1,9 +1,15 @@
 <?php
 // index.php
-include '../cek_session.php';
-include '../koneksi.php';
-// Ambil parameter page dari URL, default = home
-$page = isset($_GET['page']) ? $_GET['page'] : 'home';
+include 'pages/cek_session.php';
+include 'pages/koneksi.php';
+// Ambil parameter page
+$page = isset($_GET['page']) ? $_GET['page'] : 'index1';
+
+// Amankan nama file (hindari ../)
+$page = basename($page);
+
+// Tentukan file konten
+$file = __DIR__ . "/pages/$page.php";
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -181,30 +187,21 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
   </style>
 </head>
 <body>
-  <?php include 'header.php'; ?>
-  <?php include 'nav.php'; ?>
+  <?php include 'pages/header.php'; ?>
+  <?php include 'pages/nav.php'; ?>
 
   <div class="container">
     <?php
-    // === switch case di sini ===
-    switch ($page) {
-      case 'home':
-        include '../index1.php';
-        break;
-      case 'about':
-        include 'pages/about.php';
-        break;
-      case 'contact':
-        include 'pages/contact.php';
-        break;
-      default:
-        echo "<h1>404 - Halaman tidak ditemukan</h1>";
-        break;
+    // cek file konten
+    if (file_exists($file)) {
+      include $file;
+    } else {
+      echo "<h1>404 - Halaman tidak ditemukan</h1>";
     }
     ?>
   </div>
 
-  <?php include 'footer.php'; ?>
+  <?php include 'pages/footer.php'; ?>
 </body>
 
 

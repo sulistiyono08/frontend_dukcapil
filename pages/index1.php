@@ -1,5 +1,5 @@
 <?php
-include 'cek_session.php';
+
 include 'koneksi.php';
 $result = $koneksi->query("SELECT u.*, r.role_name, k.nama_kecamatan
                            FROM users u

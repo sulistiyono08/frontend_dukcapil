@@ -14,7 +14,7 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
     // session kadaluarsa → hapus session
     session_unset();
     session_destroy();
-    header("Location: ../login.php?timeout=1");
+    header("Location:pages/login.php?timeout=1");
     exit();
 }
 

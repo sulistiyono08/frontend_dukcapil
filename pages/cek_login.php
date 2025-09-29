@@ -26,14 +26,14 @@ if (mysqli_num_rows($result) > 0) {
         if ($user['role_id'] == 'admin') {
             header('Location: admin-dashboard.php');
         } elseif ($user['role_id'] == 'operator') {
-            header('Location:tampilan/index.php');
+            header('Location:../index.php');
         } else {
             header('Location: pemohon-dashboard.php');
         }
         exit;
     } else {
-        echo "<script>alert('Password salah'); window.location='login.php';</script>";
+        echo "<script>alert('Password salah'); window.location='pages/login.php';</script>";
     }
 } else {
-    echo "<script>alert('Username tidak ditemukan'); window.location='login.php';</script>";
+    echo "<script>alert('Username tidak ditemukan'); window.location='pages/login.php';</script>";
 }

@@ -1,19 +1,30 @@
 <?php
 // index.php
-include 'pages/cek_session.php';
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 include 'pages/koneksi.php';
-// Ambil parameter page
-$page = isset($_GET['page']) ? $_GET['page'] : 'index1';
 
-// Amankan nama file (hindari ../)
+// Ambil parameter page
+$page = isset($_GET['page']) ? $_GET['page'] : 'login';
 $page = basename($page);
+
+// kalau yang dipanggil cek_login atau cek_logout → jalankan langsung dan stop di sini
+if ($page === 'cek_login' || $page === 'cek_logout') {
+  include __DIR__ . "/pages/$page.php";
+  exit(); // hentikan agar HTML index.php tidak ikut terload
+}
+
+// kalau bukan login → cek session lebih dulu (belum ada HTML!)
+if ($page !== 'login') {
+  include 'pages/cek_session.php'; // ini cek session & timeout, redirect jika habis
+}
 
 // Tentukan file konten
 $file = __DIR__ . "/pages/$page.php";
 ?>
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -187,22 +198,29 @@ $file = __DIR__ . "/pages/$page.php";
   </style>
 </head>
 <body>
-  <?php include 'pages/header.php'; ?>
-  <?php include 'pages/nav.php'; ?>
 
-  <div class="container">
-    <?php
-    // cek file konten
-    if (file_exists($file)) {
-      include $file;
-    } else {
-      echo "<h1>404 - Halaman tidak ditemukan</h1>";
-    }
-    ?>
-  </div>
+<?php
+// tampilkan header/nav/footer hanya kalau bukan login, profile, cek_logout
+if ($page !== 'login' && $page !== 'profile' && $page !== 'cek_logout') {
+  include 'pages/header.php';
+  include 'pages/nav.php';
+}
+?>
 
-  <?php include 'pages/footer.php'; ?>
+<div class="container">
+<?php
+if (file_exists($file)) {
+  include $file;
+} else {
+  echo "<h1>404 - Halaman tidak ditemukan</h1>";
+}
+?>
+</div>
+
+<?php
+if ($page !== 'login' && $page !== 'profile' && $page !== 'cek_logout') {
+  include 'pages/footer.php';
+}
+?>
 </body>
-
-
 </html>

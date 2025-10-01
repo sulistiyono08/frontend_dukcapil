@@ -1,22 +1,26 @@
 <?php
-session_start();
+// cek_session.php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// jika belum login
+// Jika belum login → redirect ke login
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: index.php?page=login");
     exit();
 }
 
-// cek timeout (3 detik)
-$timeout = 30; // dalam detik
+// Timeout dalam detik
+$timeout = 300; // contoh 5 detik
 
+// Cek apakah sudah melebihi timeout
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $timeout)) {
-    // session kadaluarsa → hapus session
+    // Session kadaluarsa → hapus semua session
     session_unset();
     session_destroy();
-    header("Location:pages/login.php?timeout=1");
+    header("Location: index.php?page=login&timeout=1");
     exit();
 }
 
-// update last activity
+// Update last activity setiap request
 $_SESSION['last_activity'] = time();

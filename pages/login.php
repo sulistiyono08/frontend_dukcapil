@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<!-- <?php session_start(); ?> -->
 
 <!DOCTYPE html>
 <html lang="id">
@@ -14,7 +14,7 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            background: url('Tubankab.png') no-repeat center center fixed;
+            background: url('pages/Tubankab.png') no-repeat center center fixed;
             background-size: contain;
             font-family: Arial, sans-serif;
             display: flex;
@@ -75,8 +75,8 @@
 <body class="bg-light">
     <div class="login-container">
         <h2><i class="fas fa-user-lock"></i> Login</h2>
-        <form action="cek_login.php" method="post">
-        <label for="username" class="form-label">Username</label>
+        <form action="index.php?page=cek_login" method="post">
+            <label for="username" class="form-label">Username</label>
             <input type="username" name="username" required>
             <label for="password" class="form-label">Password</label>
             <input type="password" name="password" required>
@@ -84,7 +84,7 @@
         </form>
         <small>SIDOKU Kabupaten Tuban</small>
     </div>
-    
+
 </body>
 
 </html>

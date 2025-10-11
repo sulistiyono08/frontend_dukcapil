@@ -47,23 +47,45 @@ $result = $stmt->get_result();
 $roles = $koneksi->query("SELECT * FROM roles");
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
+    <meta charset="UTF-8">
     <title>Daftar User</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f7fa;
-            padding: 20px;
+        /* Navbar Sekunder (User) */
+        .sub-nav {
+            background-color: #e9eef9;
+            border-radius: 8px;
+            display: flex;
+            margin-bottom: 25px;
+            overflow: hidden;
         }
 
-        h2 {
-            margin-bottom: 15px;
+        .sub-nav a {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
             color: #1a3a8f;
+            font-weight: 600;
+            border-right: 1px solid #d0d7eb;
+            transition: background 0.3s;
         }
 
+        .sub-nav a:last-child {
+            border-right: none;
+        }
+
+        .sub-nav a:hover,
+        .sub-nav a.active {
+            background: #1a3a8f;
+            color: white;
+        }
+
+        /* ====== STYLE KHUSUS DAFTAR USER ====== */
         .search-box {
             display: flex;
             gap: 10px;
@@ -127,11 +149,6 @@ $roles = $koneksi->query("SELECT * FROM roles");
             font-size: 14px;
         }
 
-        .add {
-            background: #28a745;
-            color: #fff;
-        }
-
         .edit {
             background: #ffc107;
             color: #000;
@@ -151,58 +168,68 @@ $roles = $koneksi->query("SELECT * FROM roles");
 </head>
 
 <body>
-    <h2>Daftar User</h2>
-    <!-- <a href="tambah_user.php" class="btn add"><i class="fa fa-plus"></i> Tambah User</a> -->
 
-    <!-- Form Search -->
-    <form method="get" class="search-box">
-        <input type="hidden" name="page" value="admin-daftaruser">
-        <input type="text" name="keyword" placeholder="Cari nama, username, email, NIK..."
-            value="<?= htmlspecialchars($keyword) ?>">
-        <select name="role_id">
-            <option value="">-- Semua Role --</option>
-            <?php while ($r = $roles->fetch_assoc()): ?>
-                <option value="<?= $r['role_id'] ?>" <?= $role_id == $r['role_id'] ? 'selected' : '' ?>>
-                    <?= $r['role_name'] ?>
-                </option>
+
+    <!-- ====== KONTEN UTAMA ====== -->
+    <!-- Main -->
+    <main class="container main-content">
+        <h2 class="page-title"><i class="fas fa-users"></i> Kelola User</h2>
+
+        <!-- Sub Navbar -->
+        <div class="sub-nav">
+            <a href="index.php?page=admin-users" ><i class="fas fa-user-plus"></i> Tambah User</a>
+            <a href="index.php?page=adminutama"><i class="fas fa-list"></i> Daftar User</a>
+        </div>
+
+        <form method="get" class="search-box">
+            <input type="hidden" name="page" value="adminutama">
+            <input type="text" name="keyword" placeholder="Cari nama, username, email, NIK..." value="<?= htmlspecialchars($keyword) ?>">
+            <select name="role_id">
+                <option value="">-- Semua Role --</option>
+                <?php while ($r = $roles->fetch_assoc()): ?>
+                    <option value="<?= $r['role_id'] ?>" <?= $role_id == $r['role_id'] ? 'selected' : '' ?>>
+                        <?= $r['role_name'] ?>
+                    </option>
+                <?php endwhile; ?>
+            </select>
+            <button type="submit"><i class="fa fa-search"></i> Cari</button>
+        </form>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Kode User</th>
+                <th>Nama Lengkap</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Kecamatan</th>
+                <th>Status</th>
+                <th>Last Login</th>
+                <th>Last Logout</th>
+                <th>Aksi</th>
+            </tr>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?= $row['user_id'] ?></td>
+                    <td><?= $row['kode_user'] ?></td>
+                    <td><?= $row['nama_lengkap'] ?></td>
+                    <td><?= $row['username'] ?></td>
+                    <td><?= $row['email'] ?></td>
+                    <td><?= $row['role_name'] ?></td>
+                    <td><?= $row['nama_kecamatan'] ?></td>
+                    <td><?= $row['status'] ?></td>
+                    <td><?= $row['last_login'] ?: '-' ?></td>
+                    <td><?= $row['last_logout'] ?: '-' ?></td>
+                    <td>
+                        <a href="pages/edit_user.php?id=<?= $row['user_id'] ?>" class="btn edit"><i class="fa fa-pencil"></i></a>
+                        <a href="pages/hapus_user.php?id=<?= $row['user_id'] ?>" class="btn hapus" onclick="return confirm('Yakin hapus?')"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
             <?php endwhile; ?>
-        </select>
-        <button type="submit"><i class="fa fa-search"></i> Cari</button>
-    </form>
+        </table>
+        </div>
 
-    <table>
-    <tr>
-        <th>ID</th>
-        <th>Kode User</th>
-        <th>Nama Lengkap</th>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Kecamatan</th>
-        <th>Status</th>
-        <th>Last Login</th>
-        <th>Last Logout</th>
-        <th>Aksi</th>
-    </tr>
-    <?php while ($row = $result->fetch_assoc()): ?>
-        <tr>
-            <td><?= $row['user_id'] ?></td>
-            <td><?= $row['kode_user'] ?></td>
-            <td><?= $row['nama_lengkap'] ?></td>
-            <td><?= $row['username'] ?></td>
-            <td><?= $row['email'] ?></td>
-            <td><?= $row['role_name'] ?></td>
-            <td><?= $row['nama_kecamatan'] ?></td>
-            <td><?= $row['status'] ?></td>
-            <td><?= $row['last_login'] ?: '-' ?></td>
-            <td><?= $row['last_logout'] ?: '-' ?></td>
-            <td>
-                <a href="edit_user.php?id=<?= $row['user_id'] ?>" class="btn edit"><i class="fa fa-pencil"></i></a>
-                <a href="hapus_user.php?id=<?= $row['user_id'] ?>" class="btn hapus" onclick="return confirm('Yakin hapus?')"><i class="fa fa-trash"></i></a>
-            </td>
-        </tr>
-    <?php endwhile; ?>
-</table>
 
 </body>
 

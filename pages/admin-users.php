@@ -261,7 +261,7 @@ $kec   = $koneksi->query("SELECT * FROM kecamatan");
     <!-- Sub Navbar -->
     <div class="sub-nav">
       <a href="index.php?page=admin-users" class="active"><i class="fas fa-user-plus"></i> Tambah User</a>
-      <a href="index.php?page=admin-daftaruser"><i class="fas fa-list"></i> Daftar User</a>
+      <a href="index.php?page=adminutama"><i class="fas fa-list"></i> Daftar User</a>
     </div>
 
     <!-- Form Tambah User -->

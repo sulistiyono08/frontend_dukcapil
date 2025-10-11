@@ -18,7 +18,7 @@ $stmt = $koneksi->prepare("UPDATE users SET nama_lengkap=?,username=?,nik=?,emai
 $stmt->bind_param("sssssisi", $nama_lengkap, $username, $nik, $email, $role_id, $kecamatan_id, $status, $id);
 
 if ($stmt->execute()) {
-    header("Location: index.php");
+    header("Location:../index.php?page=adminutama");
 } else {
     echo "Gagal update: " . $stmt->error;
 }

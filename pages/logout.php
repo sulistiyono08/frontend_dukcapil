@@ -93,7 +93,7 @@ if (session_status() === PHP_SESSION_NONE) {
       <p>Apakah Anda yakin ingin keluar dari sistem?</p>
       <div class="btn-group">
         <a href="index.php?page=cek_logout" class="btn btn-logout">Ya, Logout</a>
-        <a href="admin-dashboard.html" class="btn btn-cancel">Batal</a>
+        <!-- <a href="index.php?page=ad" class="btn btn-cancel">Batal</a> -->
       </div>
     </div>
   </main>

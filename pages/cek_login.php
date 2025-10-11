@@ -20,11 +20,11 @@ $result = mysqli_query($koneksi, $sql);
 if (mysqli_num_rows($result) > 0) {
     $user = mysqli_fetch_assoc($result);
 
-    // Cek status akun
-    // if ($user['status'] !== 'aktif') {  // asumsi kolom status: 'aktif' / 'nonaktif'
-    //     echo "<script>alert('Akun Anda nonaktif, tidak dapat login'); window.location='index.php?page=login';</script>";
-    //     exit();
-    // }
+    //Cek status akun
+    if ($user['status'] !== 'aktif') {  // asumsi kolom status: 'aktif' / 'nonaktif'
+        echo "<script>alert('Akun Anda nonaktif, tidak dapat login'); window.location='index.php?page=login';</script>";
+        exit();
+    }
 
     // Verifikasi password
     if (password_verify($password, $user['password'])) {

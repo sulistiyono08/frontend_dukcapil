@@ -1,6 +1,6 @@
 <?php
 // simpan_user.php
-
+ob_start();
 include 'koneksi.php';
 
 // ambil data dari form
@@ -50,7 +50,8 @@ $stmt->bind_param(
 
 // eksekusi query
 if ($stmt->execute()) {
-    header("Location: index.php?page=admin-daftaruser");
+    header("Location: index.php?page=adminutama");
+    ob_end_flush();
     exit;
 } else {
     echo "Gagal simpan data: " . $stmt->error;

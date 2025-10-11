@@ -4,6 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+
+
 // Jika belum login → redirect ke login
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php?page=login");

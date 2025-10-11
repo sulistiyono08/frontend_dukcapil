@@ -133,6 +133,110 @@
             padding: 12px;
             border-radius: 6px;
             border-left: 4px solid #2a5298;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .document-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-document {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-preview {
+            background: #2a5298;
+            color: white;
+        }
+
+        .btn-preview:hover {
+            background: #1e3c72;
+        }
+
+        .btn-download {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-download:hover {
+            background: #218838;
+        }
+
+        /* Modal untuk preview gambar */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e3c72;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-height: 70vh;
+            overflow: auto;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 5px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
         }
 
         /* Section Verifikasi */
@@ -368,15 +472,24 @@
                         <div class="documents-grid">
                             <div class="document-item">
                                 <strong>Scan KTP</strong>
-                                <div><a href="#" style="color: #2a5298;">Download</a></div>
+                                <div class="document-actions">
+                                    <button class="btn-document btn-preview" onclick="previewDocument('ktp.jpg', 'Scan KTP')">Preview</button>
+                                    <button class="btn-document btn-download" onclick="downloadDocument('ktp.jpg', 'Scan_KTP')">Download</button>
+                                </div>
                             </div>
                             <div class="document-item">
                                 <strong>Scan KK</strong>
-                                <div><a href="#" style="color: #2a5298;">Download</a></div>
+                                <div class="document-actions">
+                                    <button class="btn-document btn-preview" onclick="previewDocument('kk.jpg', 'Scan KK')">Preview</button>
+                                    <button class="btn-document btn-download" onclick="downloadDocument('kk.jpg', 'Scan_KK')">Download</button>
+                                </div>
                             </div>
                             <div class="document-item">
                                 <strong>Surat Keterangan Lahir</strong>
-                                <div><a href="#" style="color: #2a5298;">Download</a></div>
+                                <div class="document-actions">
+                                    <button class="btn-document btn-preview" onclick="previewDocument('skl.jpg', 'Surat Keterangan Lahir')">Preview</button>
+                                    <button class="btn-document btn-download" onclick="downloadDocument('skl.jpg', 'Surat_Keterangan_Lahir')">Download</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -464,6 +577,23 @@
         </div>
     </div>
 
+    <!-- Modal untuk preview dokumen -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">Preview Dokumen</div>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" class="modal-image" src="" alt="Preview Dokumen">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Tutup</button>
+                <button class="btn btn-primary" id="modalDownloadBtn">Download</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Inisialisasi status berdasarkan data saat ini
         document.addEventListener('DOMContentLoaded', function() {
@@ -471,6 +601,49 @@
             document.getElementById(`status${currentStatus.charAt(0).toUpperCase() + currentStatus.slice(1)}`).checked = true;
             updateVerificationDate();
         });
+
+        // Fungsi untuk preview dokumen
+        function previewDocument(fileName, docName) {
+            // Dalam implementasi nyata, fileName akan diambil dari database
+            // Untuk demo, kita akan menggunakan placeholder gambar
+            const imageUrl = `https://picsum.photos/800/600?random=${Math.floor(Math.random() * 100)}`;
+
+            document.getElementById('modalTitle').textContent = `Preview - ${docName}`;
+            document.getElementById('modalImage').src = imageUrl;
+            document.getElementById('modalImage').alt = docName;
+
+            // Set event listener untuk tombol download di modal
+            document.getElementById('modalDownloadBtn').onclick = function() {
+                downloadDocument(fileName, docName.replace(/ /g, '_'));
+                closeModal();
+            };
+
+            // Tampilkan modal
+            document.getElementById('previewModal').style.display = 'flex';
+        }
+
+        // Fungsi untuk menutup modal
+        function closeModal() {
+            document.getElementById('previewModal').style.display = 'none';
+        }
+
+        // Fungsi untuk download dokumen
+        function downloadDocument(fileName, docName) {
+            // Dalam implementasi nyata, ini akan mengarah ke file yang sebenarnya
+            // Untuk demo, kita akan membuat file download sementara
+            const imageUrl = `https://picsum.photos/800/600?random=${Math.floor(Math.random() * 100)}`;
+
+            // Simulasi proses download
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.download = `${docName}.jpg`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Tampilkan notifikasi
+            alert(`File ${docName} berhasil diunduh`);
+        }
 
         // Fungsi simpan verifikasi
         function simpanVerifikasi() {
@@ -550,6 +723,14 @@
                 statusBadge.className = 'status-badge status-' + this.value;
             });
         });
+
+        // Tutup modal jika klik di luar konten modal
+        window.onclick = function(event) {
+            const modal = document.getElementById('previewModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
     </script>
 </body>
 

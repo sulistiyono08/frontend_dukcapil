@@ -33,7 +33,7 @@ if (mysqli_num_rows($result) > 0) {
         $_SESSION['user_id']        = $user['user_id'];
         $_SESSION['username']       = $user['username'];
         $_SESSION['nama']           = $user['nama_lengkap'];
-        $_SESSION['role_id']        = $user['role_id'];   
+        $_SESSION['role_id']        = $user['role_id'];
         $_SESSION['role_name']      = $user['role_name'];
         $_SESSION['last_activity']  = time();
 

@@ -221,42 +221,42 @@
             margin-right: 5px;
         }
 
-       /* ========== FOOTER ========== */
-    footer {
-      background-color: #1a3a8f;
-      color: white;
-      padding: 30px 0;
-      text-align: center;
-      margin-top: auto;
-    }
+        /* ========== FOOTER ========== */
+        footer {
+            background-color: #1a3a8f;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: auto;
+        }
 
-    .footer-logo {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .footer-logo i {
-      margin-right: 10px;
-    }
+        .footer-logo i {
+            margin-right: 10px;
+        }
 
-    .footer-info {
-      max-width: 600px;
-      margin: 10px auto;
-    }
+        .footer-info {
+            max-width: 600px;
+            margin: 10px auto;
+        }
 
-    .footer-contact p {
-      margin: 5px 0;
-    }
+        .footer-contact p {
+            margin: 5px 0;
+        }
 
-    .copyright {
-      margin-top: 15px;
-      font-size: 14px;
-      opacity: 0.8;
-    }
+        .copyright {
+            margin-top: 15px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -288,48 +288,6 @@
 </head>
 
 <body>
-    <header>
-        <div class="container header-content">
-            <div class="logo-container">
-                <div class="logo-img">
-                    <img src="Tubankab.png" alt="Logo Kabupaten Tuban" width="70" />
-                </div>
-                <!-- <div class="logo">KABUPATEN<br />TUBAN</div> -->
-                <div class="title-container">
-                    <h1>SISTEM INFORMASI DOKUMEN ON-LINE KEPENDUDUKAN</h1>
-                    <h2>KABUPATEN TUBAN</h2>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <nav>
-        <div class="container nav-container">
-            <ul class="nav-menu">
-                <li>
-                    <a href="beranda.html"><i class="fas fa-concierge-bell"></i> Pelayanan</a>
-                </li>
-                <li>
-                    <a href="cek status pengajuan.html"><i class="fas fa-search"></i> Cek Status Pengajuan</a>
-                </li>
-                <li>
-                    <a href="data dukung.html"><i class="fas fa-file-alt"></i> Data Dukung</a>
-                </li>
-                <li>
-                    <a href="download.html"><i class="fas fa-download"></i> Download</a>
-                </li>
-                <li>
-                    <a href="bantuan.html"><i class="fas fa-question-circle"></i> Bantuan</a>
-                </li>
-                <li>
-                    <a href="Pendaftaran.html"><i class="fas fa-user-plus"></i> Pendaftaran Baru</a>
-                </li>
-                <li>
-                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
 
     <main class="container main-content">
         <div class="info-banner">
@@ -436,18 +394,7 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container footer-content">
-            <div class="footer-logo"><i class="fas fa-file-contract"></i> SIDOKU KABUPATEN TUBAN</div>
-            <div class="footer-info">Sistem Informasi Dokumen On-line Kependudukan Kabupaten Tuban - Melayani Masyarakat dengan Cepat dan Akurat</div>
-            <div class="footer-contact">
-                <p><i class="fas fa-map-marker-alt"></i> Jl. Raya Tuban No. 123, Tuban</p>
-                <p><i class="fas fa-phone"></i> (0356) 321654</p>
-                <p><i class="fas fa-envelope"></i> info@sidoku-tuban.go.id</p>
-            </div>
-            <div class="copyright">&copy; 2025 Dinas Kependudukan dan Pencatatan Sipil Kabupaten Tuban</div>
-        </div>
-    </footer>
+
 </body>
 
 </html>
